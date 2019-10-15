@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48722c02-72a0-4423-bb88-d7a571fc8050" name="Default Changelist" comment="" />
+    <list default="true" id="48722c02-72a0-4423-bb88-d7a571fc8050" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php_beginner_project1/add_controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/php_beginner_project1/Controller/add_controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php_beginner_project1/add_edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/php_beginner_project1/Views/add_edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php_beginner_project1/add_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/php_beginner_project1/Model/add_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php_beginner_project1/add_time_controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/php_beginner_project1/Controller/add_time_controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php_beginner_project1/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/php_beginner_project1/Views/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php_beginner_project1/fileupload" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/php_beginner_project1/fileupload.php" beforeDir="false" afterPath="$PROJECT_DIR$/php_beginner_project1/fileupload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php_beginner_project1/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/php_beginner_project1/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php_beginner_project1/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/php_beginner_project1/Views/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php_beginner_project1/login_controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/php_beginner_project1/Controller/login_controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php_beginner_project1/login_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/php_beginner_project1/Model/login_model.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +30,13 @@
   <component name="FavoritesManager">
     <favorites_list name="current wrking" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1RgMKXxme3Q2rQV48VqkRxNXtlt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../v/php_beginner_project1-20191009T132510Z-001/php_beginner_project1" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -31,6 +50,10 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/php_beginner_project1" />
+      <recent name="$PROJECT_DIR$/php_beginner_project1/uploads" />
+      <recent name="$PROJECT_DIR$/php_beginner_project1/Views" />
+      <recent name="$PROJECT_DIR$/php_beginner_project1/Model" />
+      <recent name="$PROJECT_DIR$/php_beginner_project1/Controller" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -46,7 +69,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="add_time_controller.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/current wrking/php_beginner_project1/add_time_controller.php" useBuiltInWebServerPort="true">
+    <configuration name="add_time_controller.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/current wrking/php_beginner_project1/Controller/add_time_controller.php" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -70,11 +93,22 @@
       <workItem from="1570807346878" duration="167000" />
       <workItem from="1571029388533" duration="6226000" />
       <workItem from="1571037698022" duration="18409000" />
-      <workItem from="1571114837347" duration="21256000" />
+      <workItem from="1571114837347" duration="30935000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
