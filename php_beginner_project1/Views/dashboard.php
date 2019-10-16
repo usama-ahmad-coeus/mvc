@@ -1,11 +1,11 @@
 <?php
 //we want to redirect the user to te main  if he is already logged in
 session_start();
-if(!isset($_SESSION['user']))
-{
+if(!isset($_SESSION['user'])) {
     $user=$_SESSION['user'];
     header("Location:login.php");
 }
+
 ?>
 
 <?php if (isset($_GET["Message"])): ?>
@@ -14,25 +14,27 @@ if(!isset($_SESSION['user']))
     </script>
 <?php endif; ?>
 
-<?php
-/**
-for display full info. and edit data
-*/
-// start again
-$con=mysqli_connect('localhost','root','coeus123','php_medium_level_MVC');  // this one in error
-$userr = $_SESSION['user'];
-//if(isset($_REQUEST['id'])){
-//$id=intval($_REQUEST['id']);
-$sql="select id from Users WHERE name='$userr'";
-$run_sql=mysqli_query($con,$sql);
-$row=mysqli_fetch_array($run_sql);
-$id=$row[0];
-$timein=$row[9];
-$timeout=$row[10];
+<?php//check against db
+$servername = "localhost";
+$usernamedb = "root";
+$password = "coeus123";
+$dbname = "php_medium_level_MVC";
+// Create connection
+$conn = mysqli_connect($servername, $usernamedb, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+} else {
+    //echo "usama";die();
+    $sql = "select count(*) from 'Users' group by 'name' having destination='CEO'";
+    $result = mysqli_query($conn, $sql);
+    $values = mysqli_fetch_assoc($result);
+    mysqli_close($conn);
+}
 
-//end while
-//var_dump($run_sql);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,17 +42,15 @@ $timeout=$row[10];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Area | Dashboard</title>
-<!--    datapicker-->
+    <!-- datapicker-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-
-<!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
-
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
@@ -65,28 +65,22 @@ $timeout=$row[10];
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a  data-toggle="modal" data-target="#attendence">Mark Attendence</a></li>
-                <li><a href="add_edit.php">ADD Employees</a></li>
-                <li><a href="../pages.html">Pages</a></li>
-                <li><a href="../posts.html">Posts</a></li>
-                <li><a href="../users.html">Users</a></li>
+                <?php   if(isset($_SESSION['designation'] )) { ?>
+                    <?php if($_SESSION['designation'] == 'Admin' || $_SESSION['designation'] =='Hr') { ?>
+                    <li><a href="add_edit.php">ADD Employees</a></li>
+                        <?php } ?>
+                <?php } ?>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li style=" background-color:#ff6666 "><a href="#">Welcome,<?php echo $_SESSION['user'] ;    ?></a></li>
-                <li><a href="index.php?op=logout" style="color: white;background-color:crimson">Logout</a></li>
+                <li style=" background-color:#ff6666 "><a data-toggle="tooltip" data-placement="bottom" title="Name" href="#">Welcome,<?php echo $_SESSION['user'] ;    ?></a></li>
+                <li style=" background-color:#ff6666 "><a data-toggle="tooltip" data-placement="bottom" title="Designation" href="#"><?php echo $_SESSION['designation'] ;    ?></a></li>
+                <li><a href="../index.php?op=logout" style="color: white;background-color:crimson">Logout</a></li>
             </ul>
-
-
-<!--            <ul class="nav navbar-nav navbar-right">-->
-<!---->
-<!--                <button class="btn btn-primary">  --><?php //echo $_SESSION['user'] ;    ?><!--</button>-->
-<!--                <a href="index.php?op=logout" style="color: white;background-color:crimson">Logout</a>-->
-<!--            </ul>-->
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<script>
 
-</script>
 <header id="header">
     <div class="container">
         <div class="row">
@@ -143,26 +137,27 @@ $timeout=$row[10];
                     <div class="panel-body">
                         <div class="col-md-3">
                             <div class="well dash-box">
-                                <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 203</h2>
-                                <h4>Users</h4>
+                                <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </h2>
+                                <h4>CEO's</h4>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="well dash-box">
                                 <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 12</h2>
-                                <h4>Pages</h4>
+                                <h4>DEvelopers</h4>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="well dash-box">
                                 <h2><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 33</h2>
-                                <h4>Posts</h4>
+                                <h4>Project Manager</h4>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="well dash-box">
                                 <h2><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 12,334</h2>
-                                <h4>Visitors</h4>
+                                <h4>Incharge Manager</h4>
                             </div>
                         </div>
                     </div>
@@ -173,8 +168,6 @@ $timeout=$row[10];
         </div>
     </div>
 </section>
-
-
 <br>
 <br>
 <br>
@@ -186,7 +179,6 @@ $timeout=$row[10];
 <br>
 <br>
 <br>
-
 <footer id="footer">
     <p>Copyright AdminStrap, &copy; 2017</p>
 </footer>
@@ -206,25 +198,21 @@ $timeout=$row[10];
                 <?php } ?>
             </div>
 
-<!--            <div class="modal-body">action="index.php?user=--><?php //echo $name_user; ?>
-                <form  name="form" method="post" enctype="multipart/form-data" action="index.php">
-
-                 <div class="container">
+                <!--<div class="modal-body">action="index.php?user=--><?php //echo $name_user; ?>
+            <form  name="form" method="post" enctype="multipart/form-data" action="../index.php">
+                <div class="container">
                     <div class="form-group">
                         <label>Time In:</label>
-                        <input name ="timepicker" id="timepicker" width="276" value="<?php echo $timein;?>" />
+                        <input name ="timepicker" id="timepicker" width="276" />
                         <p>Please select SignedIn time</p>
                         <script>
                             $('#timepicker').timepicker();
                             $('#timepicker').attr('readonly', 'readonly');
-
                         </script>
-
                         <br>
                         <br>
-
                         <label>Time Out:</label>
-                        <input id="timepicker1" name="timepicker1" width="276" value="<?php echo $timeout;?>" />
+                        <input id="timepicker1" name="timepicker1" width="276"  />
                         <p>Please select SignedOut time</p>
                         <script>
                             $('#timepicker1').timepicker();
@@ -233,16 +221,14 @@ $timeout=$row[10];
                     </div>
                  </div>
 
-
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <input type="submit"  name="op"  value="add_time" class="btn btn-primary">
                     </div>
-                </form>
-            </div>
-
+            </form>
         </div>
+
+    </div>
     </div>
 </div>
 <script>
@@ -264,7 +250,7 @@ $timeout=$row[10];
 
 
             <div class="modal-body">
-                <form name="form" method="post" enctype="multipart/form-data" action="index.php">
+                <form name="form" method="post" enctype="multipart/form-data" action="../index.php">
 
                     <div class="form-group">
                         <label>Name</label>
@@ -319,6 +305,6 @@ $timeout=$row[10];
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>

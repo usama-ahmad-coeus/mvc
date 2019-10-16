@@ -1,9 +1,9 @@
 <?php
 
-class AddModel {
+class UserModel {
     private $username;
 
-    function AddModel($username) {  //constructor
+    function UserModel($username) {  //constructor
         $this->username = $username;
     }
 
@@ -14,11 +14,6 @@ class AddModel {
     function set_username($username) {//setter
         return $this->username=$username;
     }
-
-
-
-
-
 }
 
 ?>
