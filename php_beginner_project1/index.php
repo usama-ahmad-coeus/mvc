@@ -16,7 +16,14 @@ switch ($op) {
         $name = $_POST['name'];
         $password = $_POST['password'];
         $_SESSION['variable'] = $name;
-           //$r = $_GET['$userr'];
+       $connect = mysqli_connect("localhost", "root", "coeus123", "php_medium_level_MVC");
+        $query = "SELECT destination FROM Users where name ='$name'";
+        $result = mysqli_query($connect, $query);
+        $values = mysqli_fetch_assoc($result);
+
+        $designation = $values['destination'];
+        $_SESSION['designation'] =  $designation;
+        //$r = $_GET['$userr'];
            //echo $name;die();
         if ($user_controller->login($name, $password)) {//true or false
             header("Location:Views/dashboard.php");//for true
@@ -30,7 +37,7 @@ switch ($op) {
         $password = $_POST['password1'];
         $boss = $_POST['boss'];
         $designation = $_POST['designation'];
-        $_SESSION['designa'] = $designation;
+        $date= $_POST['date'];
 
             //require 'fileupload.php?var=$file';//get $variable = $_GET["var"]// for upload to folder
         $file = $_FILES['file']['name'];
@@ -38,7 +45,7 @@ switch ($op) {
 
         require 'fileupload.php';
 
-        if ($add_controller->add($name, $email, $department, $salary, $password, $boss, $designation, $file)) {//true or false
+        if ($add_controller->add($email, $name, $department, $salary, $password, $boss, $designation, $file,$date)) {//true or false
             header("Location:Views/add_edit.php");//for true
         } else
             header("Location:Views/add_edit.php?err=1");
@@ -81,6 +88,28 @@ switch ($op) {
             }
         }
         break;
+        case  'edit_employees':
+            $name = $_POST['name2'];
+            $email = $_POST['email1'];
+            $department = $_POST['department1'];
+            $salary = $_POST['salary1'];
+            $password = $_POST['password1'];
+            $boss = $_POST['boss'];
+            $designation = $_POST['designation'];
+            //$image= $_POST['image2'];
+
+            //require 'fileupload.php?var=$file';//get $variable = $_GET["var"]// for upload to folder
+            $file = $_FILES['file']['name'];
+            $filewe = $file;
+
+            require 'fileupload_for_edit.php';
+
+            if ($add_controller->edit_add($email, $name, $department, $salary, $password, $boss, $designation,$file)) {//true or false
+                header("Location:Views/add_edit.php");//for true
+            } else
+                header("Location:Views/add_edit.php?err=1");
+            break;
+
     case 'logout':
         $user_controller->logout();
         header("Location:Views/login.php");

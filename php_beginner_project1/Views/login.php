@@ -26,15 +26,18 @@ if (isset($_SESSION['user'])) {
     <link href="../css/style.css" rel="stylesheet">
     <script src="../js/bootstrap.min.js"></script>
 </head>
-<body
+<body>
+
 <header id="header">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Login <small>Manage Your Site</small></h1>
+                <h1 ><span class="glyphicon glyphicon-cog" aria-hidden="true" ></span > Login <small>Manage Your Site</small></h1>
             </div>
             <div class="col-md-4" style="padding-top: 2rem;">
+
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPage" style="width: 14rem;height: 4rem">Login</button>
+
             </div>
         </div>
     </div>
@@ -42,6 +45,7 @@ if (isset($_SESSION['user'])) {
 <br>
 <br>
 </body>
+
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
         <div id="content-data"></div>
@@ -64,7 +68,7 @@ if (isset($_SESSION['user'])) {
             <div class="modal-body">
                 <form name="form" method="post" enctype="multipart/form-data" action="../index.php">
                     <div class="form-group">
-                        <label>Email </label>
+                        <label>Name </label>
                         <input type="text" name="name" class="form-control" placeholder="Enter name">
                     </div>
                     <div class="form-group">

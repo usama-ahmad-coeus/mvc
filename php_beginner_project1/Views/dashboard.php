@@ -6,19 +6,6 @@ if(!isset($_SESSION['user'])) {
     header("Location:login.php");
 }
 
-     // start again
-$con=mysqli_connect('localhost','root','coeus123','php_medium_level_MVC');
-     // this one in error
-$userr = $_SESSION['user'];
-     //if(isset($_REQUEST['id'])){
-     //$id=intval($_REQUEST['id']);
-$sql="select id from Users WHERE name='$userr'";
-$run_sql=mysqli_query($con,$sql);
-$row=mysqli_fetch_array($run_sql);
-$id=$row[0];
-$timein=$row[9];
-$timeout=$row[10];
-
 ?>
 
 <?php if (isset($_GET["Message"])): ?>
@@ -26,6 +13,26 @@ $timeout=$row[10];
         alert("<?php echo htmlentities(urldecode($_GET["Message"])); ?>");
     </script>
 <?php endif; ?>
+
+<?php//check against db
+$servername = "localhost";
+$usernamedb = "root";
+$password = "coeus123";
+$dbname = "php_medium_level_MVC";
+// Create connection
+$conn = mysqli_connect($servername, $usernamedb, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+} else {
+    //echo "usama";die();
+    $sql = "select count(*) from 'Users' group by 'name' having destination='CEO'";
+    $result = mysqli_query($conn, $sql);
+    $values = mysqli_fetch_assoc($result);
+    mysqli_close($conn);
+}
+
+?>
 
 
 <!DOCTYPE html>
@@ -58,13 +65,16 @@ $timeout=$row[10];
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a  data-toggle="modal" data-target="#attendence">Mark Attendence</a></li>
-                <li><a href="add_edit.php">ADD Employees</a></li>
-                <li><a href="../pages.html">Pages</a></li>
-                <li><a href="../posts.html">Posts</a></li>
-                <li><a href="../users.html">Users</a></li>
+                <?php   if(isset($_SESSION['designation'] )) { ?>
+                    <?php if($_SESSION['designation'] == 'Admin' || $_SESSION['designation'] =='Hr') { ?>
+                    <li><a href="add_edit.php">ADD Employees</a></li>
+                        <?php } ?>
+                <?php } ?>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li style=" background-color:#ff6666 "><a href="#">Welcome,<?php echo $_SESSION['user'] ;    ?></a></li>
+                <li style=" background-color:#ff6666 "><a data-toggle="tooltip" data-placement="bottom" title="Name" href="#">Welcome,<?php echo $_SESSION['user'] ;    ?></a></li>
+                <li style=" background-color:#ff6666 "><a data-toggle="tooltip" data-placement="bottom" title="Designation" href="#"><?php echo $_SESSION['designation'] ;    ?></a></li>
                 <li><a href="../index.php?op=logout" style="color: white;background-color:crimson">Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -127,26 +137,27 @@ $timeout=$row[10];
                     <div class="panel-body">
                         <div class="col-md-3">
                             <div class="well dash-box">
-                                <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 203</h2>
-                                <h4>Users</h4>
+                                <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </h2>
+                                <h4>CEO's</h4>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="well dash-box">
                                 <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 12</h2>
-                                <h4>Pages</h4>
+                                <h4>DEvelopers</h4>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="well dash-box">
                                 <h2><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 33</h2>
-                                <h4>Posts</h4>
+                                <h4>Project Manager</h4>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="well dash-box">
                                 <h2><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 12,334</h2>
-                                <h4>Visitors</h4>
+                                <h4>Incharge Manager</h4>
                             </div>
                         </div>
                     </div>
@@ -192,7 +203,7 @@ $timeout=$row[10];
                 <div class="container">
                     <div class="form-group">
                         <label>Time In:</label>
-                        <input name ="timepicker" id="timepicker" width="276" value="<?php echo $timein;?>" />
+                        <input name ="timepicker" id="timepicker" width="276" />
                         <p>Please select SignedIn time</p>
                         <script>
                             $('#timepicker').timepicker();
@@ -201,7 +212,7 @@ $timeout=$row[10];
                         <br>
                         <br>
                         <label>Time Out:</label>
-                        <input id="timepicker1" name="timepicker1" width="276" value="<?php echo $timeout;?>" />
+                        <input id="timepicker1" name="timepicker1" width="276"  />
                         <p>Please select SignedOut time</p>
                         <script>
                             $('#timepicker1').timepicker();
